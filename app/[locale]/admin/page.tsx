@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { createClient } from '@/lib/supabase/server';
+import { createServiceClient } from '@/lib/supabase/server';
 import type { BookingStatus, BookingRow } from '@/lib/supabase/types';
 
 const STATUS_COLORS: Record<BookingStatus, string> = {
@@ -20,7 +20,7 @@ export default async function AdminDashboardPage({
   const { locale } = await params;
   const { status } = await searchParams;
 
-  const supabase = await createClient();
+  const supabase = await createServiceClient();
   let query = supabase
     .from('bookings')
     .select('*')

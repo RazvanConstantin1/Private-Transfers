@@ -1,13 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { createServiceClient } from '@/lib/supabase/server';
+import { createClient, createServiceClient } from '@/lib/supabase/server';
 
 const updateSchema = z.object({
   status: z.enum(['pending', 'confirmed', 'in_progress', 'completed', 'cancelled']).optional(),
   admin_notes: z.string().optional(),
 });
 
+async function requireAdmin(): Promise<boolean> {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return false;
+  const adminEmail = process.env.ADMIN_EMAIL;
+  if (adminEmail && user.email !== adminEmail) return false;
+  return true;
+}
+
 export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  if (!await requireAdmin()) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   const { id } = await params;
   const supabase = await createServiceClient();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -17,6 +27,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
 }
 
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  if (!await requireAdmin()) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   const { id } = await params;
   const body = await req.json().catch(() => null);
   const parsed = updateSchema.safeParse(body);

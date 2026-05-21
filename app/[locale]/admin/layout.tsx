@@ -12,7 +12,8 @@ export default async function AdminLayout({
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
-  if (!user) {
+  const adminEmail = process.env.ADMIN_EMAIL;
+  if (!user || (adminEmail && user.email !== adminEmail)) {
     redirect(`/${locale}/admin/login`);
   }
 
