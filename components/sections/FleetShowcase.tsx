@@ -43,12 +43,12 @@ export default function FleetShowcase() {
               style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
             >
               {/* Vehicle photo */}
-              <div className="aspect-[4/3] relative overflow-hidden bg-[var(--bg-elevated)]">
+              <div className="aspect-[4/3] relative overflow-hidden" style={{ background: '#f0f1f2' }}>
                 <Image
                   src={vehicle.imageUrl}
                   alt={vehicle.name}
                   fill
-                  className="object-cover transition-vl group-hover:scale-[1.02]"
+                  className="object-contain p-4 transition-vl group-hover:scale-[1.03]"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
