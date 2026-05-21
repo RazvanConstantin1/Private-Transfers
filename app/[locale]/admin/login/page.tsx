@@ -19,14 +19,19 @@ export default function AdminLoginPage() {
     setLoading(true);
     setError('');
     const supabase = createClient();
-    const { error: authError } = await supabase.auth.signInWithPassword({ email, password });
+    const { data, error: authError } = await supabase.auth.signInWithPassword({ email, password });
     if (authError) {
       setError(authError.message);
       setLoading(false);
       return;
     }
-    router.push(`/${locale}/admin`);
-    router.refresh();
+    if (!data.session) {
+      setError('No session returned. Check Supabase email confirmation settings.');
+      setLoading(false);
+      return;
+    }
+    // Full page reload so the server reads the fresh cookie on first render
+    window.location.href = `/${locale}/admin`;
   }
 
   return (
