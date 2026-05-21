@@ -10,6 +10,14 @@ const STATUS_COLORS: Record<BookingStatus, string> = {
   cancelled: '#ef4444',
 };
 
+const STATUS_LABELS: Record<BookingStatus, string> = {
+  pending: 'Pending',
+  confirmed: 'Confirmed',
+  in_progress: 'In Progress',
+  completed: 'Completed',
+  cancelled: 'Cancelled',
+};
+
 export default async function AdminDashboardPage({
   params,
   searchParams,
@@ -21,42 +29,47 @@ export default async function AdminDashboardPage({
   const { status } = await searchParams;
 
   const supabase = createServiceClient();
-  let query = supabase
-    .from('bookings')
-    .select('*')
-    .order('created_at', { ascending: false });
-
-  if (status && status !== 'all') {
-    query = query.eq('status', status);
-  }
-
-  const { data: bookingsRaw } = await query.limit(100);
-  const bookings = bookingsRaw as BookingRow[] | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let query = (supabase as any).from('bookings').select('*').order('created_at', { ascending: false });
+  if (status && status !== 'all') query = query.eq('status', status);
+  const { data: bookings } = await query.limit(100) as { data: BookingRow[] | null };
 
   const statuses: (BookingStatus | 'all')[] = ['all', 'pending', 'confirmed', 'in_progress', 'completed', 'cancelled'];
+  const activeStatus = status || 'all';
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="font-display text-3xl font-300" style={{ color: 'var(--text-primary)' }}>
-          Bookings
-        </h1>
-        <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
-          {bookings?.length || 0} shown
-        </p>
+      {/* Header */}
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="font-display text-2xl md:text-3xl font-300" style={{ color: 'var(--text-primary)' }}>
+            Bookings
+          </h1>
+          <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>
+            {bookings?.length || 0} {activeStatus !== 'all' ? activeStatus.replace('_', ' ') : 'total'}
+          </p>
+        </div>
+        <Link
+          href={`/${locale}/admin/new`}
+          className="flex items-center gap-2 px-4 py-2.5 text-sm font-600 rounded-full transition-vl hover:opacity-90 active:scale-[0.98]"
+          style={{ background: 'var(--accent-volt)', color: '#0A0A0B' }}
+        >
+          <span style={{ fontSize: 18, lineHeight: 1 }}>+</span>
+          <span className="hidden sm:inline">New Booking</span>
+        </Link>
       </div>
 
-      {/* Status filters */}
-      <div className="flex flex-wrap gap-2 mb-8">
+      {/* Status filters — scrollable on mobile */}
+      <div className="flex gap-2 mb-6 overflow-x-auto pb-1 scrollbar-none">
         {statuses.map((s) => (
           <Link
             key={s}
             href={`/${locale}/admin${s !== 'all' ? `?status=${s}` : ''}`}
-            className="px-4 py-1.5 text-xs font-600 rounded-full border transition-vl capitalize"
+            className="px-3 py-1.5 text-xs font-600 rounded-full border transition-vl capitalize whitespace-nowrap flex-shrink-0"
             style={{
-              borderColor: (status || 'all') === s ? 'var(--accent-volt)' : 'var(--border)',
-              color: (status || 'all') === s ? 'var(--accent-volt)' : 'var(--text-muted)',
-              background: (status || 'all') === s ? 'var(--accent-volt-dim)' : 'transparent',
+              borderColor: activeStatus === s ? 'var(--accent-volt)' : 'var(--border)',
+              color: activeStatus === s ? 'var(--accent-volt)' : 'var(--text-muted)',
+              background: activeStatus === s ? 'var(--accent-volt-dim)' : 'transparent',
             }}
           >
             {s.replace('_', ' ')}
@@ -64,70 +77,107 @@ export default async function AdminDashboardPage({
         ))}
       </div>
 
-      {/* Table */}
-      <div className="rounded-2xl border overflow-hidden" style={{ borderColor: 'var(--border)' }}>
+      {/* Empty state */}
+      {!bookings?.length ? (
         <div
-          className="hidden md:grid grid-cols-[1fr_140px_100px_120px_80px_100px] gap-4 px-6 py-3 text-xs font-600 uppercase tracking-widest border-b"
-          style={{ background: 'var(--bg-elevated)', borderColor: 'var(--border)', color: 'var(--text-muted)', fontFamily: 'var(--font-jetbrains)' }}
+          className="rounded-2xl border px-6 py-16 text-center"
+          style={{ borderColor: 'var(--border)', color: 'var(--text-muted)' }}
         >
-          <span>Customer / Route</span>
-          <span>Date</span>
-          <span>Vehicle</span>
-          <span className="text-right">Total</span>
-          <span>Status</span>
-          <span></span>
+          No bookings found.
         </div>
-
-        {bookings?.length === 0 ? (
-          <div className="px-6 py-12 text-center" style={{ color: 'var(--text-muted)' }}>
-            No bookings found.
+      ) : (
+        <>
+          {/* Desktop table header */}
+          <div
+            className="hidden md:grid grid-cols-[1fr_130px_110px_90px_110px_48px] gap-4 px-4 py-2 text-xs font-600 uppercase tracking-widest rounded-xl mb-1"
+            style={{ background: 'var(--bg-elevated)', color: 'var(--text-muted)', fontFamily: 'var(--font-jetbrains)' }}
+          >
+            <span>Customer / Route</span>
+            <span>Date</span>
+            <span>Vehicle</span>
+            <span className="text-right">Total</span>
+            <span>Status</span>
+            <span />
           </div>
-        ) : (
-          <div className="divide-y" style={{ borderColor: 'var(--border-soft)' }}>
-            {bookings?.map((b) => (
-              <div
+
+          {/* Rows */}
+          <div className="space-y-2 md:space-y-0 md:divide-y rounded-2xl md:border md:overflow-hidden" style={{ borderColor: 'var(--border)' }}>
+            {bookings.map((b) => (
+              <Link
                 key={b.id}
-                className="flex flex-col md:grid md:grid-cols-[1fr_140px_100px_120px_80px_100px] gap-2 md:gap-4 px-6 py-4 transition-vl hover:bg-[var(--bg-card-hover)]"
+                href={`/${locale}/admin/bookings/${b.id}`}
+                className="group block md:grid md:grid-cols-[1fr_130px_110px_90px_110px_48px] md:gap-4 md:items-center px-4 py-3.5 rounded-2xl md:rounded-none border md:border-0 transition-vl hover:bg-[var(--bg-card-hover)] active:bg-[var(--bg-card-hover)]"
+                style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
               >
-                <div>
-                  <p className="text-sm font-500" style={{ color: 'var(--text-primary)' }}>{b.customer_name}</p>
-                  <p className="text-xs mt-0.5" style={{ color: 'var(--text-muted)' }}>
-                    {b.pickup_address.split(',')[0]} → {b.dropoff_address.split(',')[0]}
+                {/* Mobile layout */}
+                <div className="flex items-start justify-between gap-3 md:contents">
+                  {/* Name + route */}
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-500 truncate" style={{ color: 'var(--text-primary)' }}>
+                      {b.customer_name}
+                    </p>
+                    <p className="text-xs mt-0.5 truncate" style={{ color: 'var(--text-muted)' }}>
+                      {b.pickup_address.split(',')[0]} → {b.dropoff_address.split(',')[0]}
+                    </p>
+                    {/* Mobile-only meta */}
+                    <div className="flex items-center gap-2 mt-1.5 md:hidden">
+                      <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                        {new Date(b.pickup_datetime).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })}
+                      </span>
+                      <span style={{ color: 'var(--border)' }}>·</span>
+                      <span className="text-xs capitalize" style={{ color: 'var(--text-muted)' }}>
+                        {b.vehicle_id.replace(/_/g, ' ')}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Mobile: price + status */}
+                  <div className="flex flex-col items-end gap-1.5 flex-shrink-0 md:hidden">
+                    <span className="font-display text-base" style={{ color: 'var(--accent-gold)' }}>
+                      €{b.total_price_eur}
+                    </span>
+                    <span
+                      className="text-xs px-2 py-0.5 rounded-full font-600"
+                      style={{
+                        background: `${STATUS_COLORS[b.status as BookingStatus]}22`,
+                        color: STATUS_COLORS[b.status as BookingStatus],
+                      }}
+                    >
+                      {STATUS_LABELS[b.status as BookingStatus]}
+                    </span>
+                  </div>
+
+                  {/* Desktop-only columns */}
+                  <p className="hidden md:block text-xs" style={{ color: 'var(--text-secondary)' }}>
+                    {new Date(b.pickup_datetime).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}
                   </p>
+                  <p className="hidden md:block text-xs capitalize" style={{ color: 'var(--text-secondary)' }}>
+                    {b.vehicle_id.replace(/_/g, ' ')}
+                  </p>
+                  <p className="hidden md:block font-display text-base text-right" style={{ color: 'var(--accent-gold)' }}>
+                    €{b.total_price_eur}
+                  </p>
+                  <span
+                    className="hidden md:inline-block text-xs px-2 py-1 rounded-full font-600 w-fit"
+                    style={{
+                      background: `${STATUS_COLORS[b.status as BookingStatus]}22`,
+                      color: STATUS_COLORS[b.status as BookingStatus],
+                    }}
+                  >
+                    {STATUS_LABELS[b.status as BookingStatus]}
+                  </span>
+                  <span
+                    className="hidden md:block text-xs font-600 text-right transition-vl group-hover:text-[var(--accent-volt)]"
+                    style={{ color: 'var(--text-muted)' }}
+                  >
+                    →
+                  </span>
                 </div>
-                <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
-                  {new Date(b.pickup_datetime).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}
-                </p>
-                <p className="text-xs capitalize" style={{ color: 'var(--text-secondary)' }}>
-                  {b.vehicle_id.replace(/_/g, ' ')}
-                </p>
-                <p
-                  className="font-display text-base md:text-right"
-                  style={{ color: 'var(--accent-gold)' }}
-                >
-                  €{b.total_price_eur}
-                </p>
-                <span
-                  className="inline-block text-xs px-2 py-1 rounded-full font-600 w-fit"
-                  style={{
-                    background: `${STATUS_COLORS[b.status as BookingStatus]}22`,
-                    color: STATUS_COLORS[b.status as BookingStatus],
-                  }}
-                >
-                  {b.status.replace('_', ' ')}
-                </span>
-                <Link
-                  href={`/${locale}/admin/bookings/${b.id}`}
-                  className="text-xs font-600 transition-vl hover:text-[var(--accent-volt)] md:text-right"
-                  style={{ color: 'var(--text-secondary)' }}
-                >
-                  View →
-                </Link>
-              </div>
+              </Link>
             ))}
           </div>
-        )}
-      </div>
+        </>
+      )}
     </div>
   );
 }
