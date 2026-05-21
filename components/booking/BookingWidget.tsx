@@ -598,7 +598,7 @@ export default function BookingWidget() {
                 >
                   <div className="flex items-center gap-3 p-3.5">
                     <div className="relative w-20 h-14 rounded-lg overflow-hidden flex-shrink-0" style={{ background: '#f0f1f2' }}>
-                      <Image src={vehicle.imageUrl} alt={vehicle.name} fill className="object-contain p-1.5" sizes="80px" priority={index === 0} />
+                      <Image src={vehicle.imageUrl} alt={vehicle.name} fill className="object-contain p-0" sizes="80px" priority={index === 0} />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="font-display text-sm font-400" style={{ color: 'var(--text-primary)' }}>{vehicle.name}</p>

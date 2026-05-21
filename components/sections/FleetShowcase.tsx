@@ -48,7 +48,7 @@ export default function FleetShowcase() {
                   src={vehicle.imageUrl}
                   alt={vehicle.name}
                   fill
-                  className="object-contain p-4 transition-vl group-hover:scale-[1.03]"
+                  className="object-contain p-1 transition-vl group-hover:scale-[1.06]"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>

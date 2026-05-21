@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { createServiceClient } from '@/lib/supabase/server';
 import type { BookingStatus, BookingRow } from '@/lib/supabase/types';
+import VehicleStats from '@/components/admin/VehicleStats';
+import { FLEET } from '@/lib/fleet';
 
 const STATUS_COLORS: Record<BookingStatus, string> = {
   pending: '#E5C687',
@@ -29,10 +31,43 @@ export default async function AdminDashboardPage({
   const { status } = await searchParams;
 
   const supabase = createServiceClient();
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let query = (supabase as any).from('bookings').select('*').order('created_at', { ascending: false });
+  const sb = supabase as any;
+
+  // Filtered list for the table
+  let query = sb.from('bookings').select('*').order('created_at', { ascending: false });
   if (status && status !== 'all') query = query.eq('status', status);
   const { data: bookings } = await query.limit(100) as { data: BookingRow[] | null };
+
+  // All bookings for stats (no limit, no status filter)
+  const { data: allBookings } = await sb
+    .from('bookings')
+    .select('vehicle_id, total_price_eur, status') as { data: { vehicle_id: string; total_price_eur: number; status: string }[] | null };
+
+  const nonCancelled = allBookings?.filter((b) => b.status !== 'cancelled') ?? [];
+  const pending = allBookings?.filter((b) => b.status === 'pending') ?? [];
+  const totalRevenue = nonCancelled.reduce((s, b) => s + b.total_price_eur, 0);
+
+  const overall = {
+    total: nonCancelled.length,
+    revenue: totalRevenue,
+    pending: pending.length,
+    avgPrice: nonCancelled.length > 0 ? totalRevenue / nonCancelled.length : 0,
+  };
+
+  const vehicleStats = FLEET.map((v) => {
+    const rows = nonCancelled.filter((b) => b.vehicle_id === v.id);
+    const revenue = rows.reduce((s, b) => s + b.total_price_eur, 0);
+    return {
+      vehicle_id: v.id,
+      name: v.name,
+      trips: rows.length,
+      revenue,
+      avg: rows.length > 0 ? revenue / rows.length : 0,
+      pending: pending.filter((b) => b.vehicle_id === v.id).length,
+    };
+  });
 
   const statuses: (BookingStatus | 'all')[] = ['all', 'pending', 'confirmed', 'in_progress', 'completed', 'cancelled'];
   const activeStatus = status || 'all';
@@ -58,6 +93,9 @@ export default async function AdminDashboardPage({
           <span className="hidden sm:inline">New Booking</span>
         </Link>
       </div>
+
+      {/* Stats */}
+      <VehicleStats overall={overall} vehicles={vehicleStats} />
 
       {/* Status filters — scrollable on mobile */}
       <div className="flex gap-2 mb-6 overflow-x-auto pb-1 scrollbar-none">
