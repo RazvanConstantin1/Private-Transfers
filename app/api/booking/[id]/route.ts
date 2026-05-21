@@ -19,7 +19,7 @@ async function requireAdmin(): Promise<boolean> {
 export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   if (!await requireAdmin()) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   const { id } = await params;
-  const supabase = await createServiceClient();
+  const supabase = createServiceClient();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data, error } = await (supabase as any).from('bookings').select('*').eq('id', id).single();
   if (error || !data) return NextResponse.json({ error: 'Not found' }, { status: 404 });
@@ -33,7 +33,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   const parsed = updateSchema.safeParse(body);
   if (!parsed.success) return NextResponse.json({ error: 'Invalid data' }, { status: 400 });
 
-  const supabase = await createServiceClient();
+  const supabase = createServiceClient();
   const updateData: Record<string, unknown> = { ...parsed.data };
   if (parsed.data.status === 'confirmed') updateData.confirmed_at = new Date().toISOString();
   if (parsed.data.status === 'cancelled') updateData.cancelled_at = new Date().toISOString();

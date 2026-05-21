@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const supabase = await createServiceClient();
+  const supabase = createServiceClient();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data: booking, error } = await (supabase as any)
     .from('bookings')

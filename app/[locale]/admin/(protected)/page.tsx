@@ -20,7 +20,7 @@ export default async function AdminDashboardPage({
   const { locale } = await params;
   const { status } = await searchParams;
 
-  const supabase = await createServiceClient();
+  const supabase = createServiceClient();
   let query = supabase
     .from('bookings')
     .select('*')
