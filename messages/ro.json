@@ -1,0 +1,236 @@
+{
+  "nav": {
+    "services": "Servicii",
+    "fleet": "Flotă",
+    "routes": "Rute",
+    "about": "Despre",
+    "contact": "Contact",
+    "bookNow": "Rezervă Acum"
+  },
+  "hero": {
+    "eyebrow": "Flotă 100% Electrică · 3 Categorii de Vehicule",
+    "headline": "Transferuri electrice premium în",
+    "headlineAccent": "România.",
+    "subtitle": "Șofer vorbitor de engleză. Prețuri fixe. Fără majorări. Aeroport, intercity & orar.",
+    "ctaPrimary": "Rezervă Transferul",
+    "ctaWhatsApp": "WhatsApp",
+    "trust": {
+      "electric": "100% Electric",
+      "englishDriver": "Șofer Privat",
+      "fixedPrice": "Prețuri Fixe",
+      "available": "Disponibil 24/7"
+    }
+  },
+  "services": {
+    "title": "Alege Serviciul Tău",
+    "subtitle": "Trei modalități de a călători confortabil în România.",
+    "airport": {
+      "title": "Transferuri Aeroport",
+      "description": "Preluare și predare fără stres la Aeroportul Internațional Henri Coandă (OTP). Monitorizare zboruri inclusă.",
+      "from": "de la €48"
+    },
+    "intercity": {
+      "title": "Rute Intercity",
+      "description": "Confort ușă-la-ușă între București și cele mai frumoase destinații din România. Preț fix, fără surprize.",
+      "from": "de la €100"
+    },
+    "hourly": {
+      "title": "Rezervare Orară",
+      "description": "Șoferul tău personal pentru o zi. Ședințe de afaceri, tururi orașului, evenimente — flexibilitate maximă.",
+      "from": "de la €60/oră"
+    }
+  },
+  "routes": {
+    "title": "Rute Populare",
+    "subtitle": "Prețuri fixe, fără majorări. Niciodată.",
+    "vehicle": "Tesla Model 3",
+    "from": "de la",
+    "withKona": "cu Kona",
+    "viewAll": "Vezi Toate Rutele",
+    "routes": {
+      "brasov": { "name": "București → Brașov", "distance": "166 km", "duration": "2h 30min", "price": "€196" },
+      "sinaia": { "name": "București → Sinaia", "distance": "125 km", "duration": "1h 45min", "price": "€155" },
+      "sibiu": { "name": "București → Sibiu", "distance": "280 km", "duration": "3h 15min", "price": "€465" },
+      "constanta": { "name": "București → Constanța", "distance": "225 km", "duration": "2h 30min", "price": "€255" },
+      "cluj": { "name": "București → Cluj-Napoca", "distance": "460 km", "duration": "5h 00min", "price": "€758" },
+      "iasi": { "name": "București → Iași", "distance": "390 km", "duration": "4h 15min", "price": "€630" }
+    }
+  },
+  "why": {
+    "title": "De ce VOLTLANE?",
+    "subtitle": "Am construit serviciul pe care am vrut să-l folosim noi înșine.",
+    "electric": {
+      "title": "100% Electric",
+      "description": "Zero emisii, călătorii silențioase. Mai bine pentru România, mai bine pentru tine."
+    },
+    "driver": {
+      "title": "Șofer Real",
+      "description": "Engleză fluentă, profesionist și discret. Același standard ridicat de fiecare dată."
+    },
+    "pricing": {
+      "title": "Prețuri Fixe",
+      "description": "Vedere prețul înainte de rezervare. Fără majorări, fără taxe ascunse, fără surprize."
+    },
+    "onTime": {
+      "title": "La Timp",
+      "description": "Monitorizare zboruri, urmărire în timp real. Suntem acolo înainte de tine."
+    }
+  },
+  "fleet": {
+    "title": "Trei vehicule.",
+    "titleAccent": "Un singur standard de lux.",
+    "subtitle": "Alege ce se potrivește călătoriei tale — fiecare vehicul este electric, fiecare călătorie este premium.",
+    "from": "de la",
+    "perKm": "/km",
+    "passengers": "pasageri",
+    "luggage": "bagaje",
+    "viewDetails": "Detalii",
+    "selectVehicle": "Selectează"
+  },
+  "cta": {
+    "headline": "Următoarea ta călătorie în",
+    "headlineAccent": "România",
+    "headlineEnd": "începe aici.",
+    "subtitle": "Alătură-te sutelor de călători care au ales VOLTLANE pentru o experiență mai liniștită și mai curată.",
+    "button": "Rezervă Transferul",
+    "whatsapp": "Chat pe WhatsApp"
+  },
+  "footer": {
+    "tagline": "Transferuri electrice premium în România.",
+    "services": "Servicii",
+    "company": "Companie",
+    "legal": "Legal",
+    "contact": "Contact",
+    "airport": "Transferuri Aeroport",
+    "intercity": "Rute Intercity",
+    "hourly": "Rezervare Orară",
+    "fleet": "Flota Noastră",
+    "about": "Despre Noi",
+    "contactPage": "Contact",
+    "privacy": "Politica de Confidențialitate",
+    "terms": "Termeni și Condiții",
+    "copyright": "© 2026 VOLTLANE. Toate drepturile rezervate.",
+    "madeWith": "Creat cu ⚡ în România"
+  },
+  "booking": {
+    "title": "Rezervă Transferul",
+    "subtitle": "Prețuri în timp real. Fără surprize.",
+    "tripType": "Tip Călătorie",
+    "oneWay": "Dus",
+    "roundTrip": "Dus-Întors",
+    "pickup": "Adresă de Preluare",
+    "pickupPlaceholder": "Introdu locația de preluare",
+    "dropoff": "Adresă Destinație",
+    "dropoffPlaceholder": "Introdu destinația",
+    "pickupDate": "Data și Ora Preluării",
+    "returnDate": "Data și Ora Întoarcerii",
+    "passengers": "Pasageri",
+    "flightNumber": "Număr Zbor",
+    "flightNumberPlaceholder": "ex. RO123 (opțional)",
+    "selectVehicle": "Selectează Vehiculul",
+    "name": "Nume Complet",
+    "namePlaceholder": "Numele tău complet",
+    "email": "Adresă Email",
+    "emailPlaceholder": "email@tau.com",
+    "phone": "Număr de Telefon",
+    "phonePlaceholder": "+40 7XX XXX XXX",
+    "notes": "Solicitări Speciale",
+    "notesPlaceholder": "Scaun copil, semn de întâmpinare, opriri extra...",
+    "continue": "Continuă",
+    "back": "Înapoi",
+    "submit": "Confirmă Rezervarea · €",
+    "calculating": "Se calculează...",
+    "errors": {
+      "pickupRequired": "Adresa de preluare este obligatorie",
+      "dropoffRequired": "Adresa de destinație este obligatorie",
+      "dateRequired": "Data și ora sunt obligatorii",
+      "returnRequired": "Data de întoarcere este obligatorie pentru dus-întors",
+      "vehicleRequired": "Vă rugăm selectați un vehicul",
+      "nameRequired": "Numele complet este obligatoriu (min 2 caractere)",
+      "emailRequired": "Adresa de email validă este obligatorie",
+      "phoneRequired": "Numărul de telefon valid este obligatoriu",
+      "priceMismatch": "Eroare de preț — vă rugăm recalculați",
+      "bookingFailed": "Rezervarea a eșuat. Vă rugăm încercați din nou."
+    }
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Întrebări frecvente",
+    "titleAccent": "răspunse.",
+    "items": [
+      {
+        "q": "Cu cât timp înainte trebuie să rezerv?",
+        "a": "Recomandăm să rezervi cu cel puțin 2 ore înainte. Pentru preluări de la aeroport, ideal cu 24 de ore. Cererile de ultim moment sunt uneori posibile — scrie-ne pe WhatsApp."
+      },
+      {
+        "q": "Prețurile sunt cu adevărat fixe?",
+        "a": "Da. Prețul afișat la rezervare este exact ce plătești — fără majorări, fără taxe aeroport ascunse, fără extra. Noi îl stabilim, tu îl confirmi, acesta este prețul final."
+      },
+      {
+        "q": "Ce se întâmplă dacă zborul meu întârzie?",
+        "a": "Monitorizăm zborul în timp real. Dacă întârzie, ajustăm automat ora de preluare fără nicio taxă suplimentară. Nu trebuie să ne suni — suntem deja pe fir."
+      },
+      {
+        "q": "Oferiti scaune pentru copii?",
+        "a": "Da. Menționează 'scaun copil' (și vârsta copilului dacă e posibil) la câmpul Solicitări Speciale. Vom pregăti scaunul potrivit înainte de sosire."
+      },
+      {
+        "q": "Șoferul vorbește engleză?",
+        "a": "Da. Șoferul tău vorbește engleză fluentă, este pregătit profesional și discret. Același standard de fiecare dată."
+      },
+      {
+        "q": "Pot anula sau modifica rezervarea?",
+        "a": "Anulare gratuită cu până la 24 de ore înainte de preluare. Trebuie să schimbi ora sau adresa? Contactează-ne oricând pe WhatsApp sau email și rezolvăm rapid."
+      },
+      {
+        "q": "Operați doar din București?",
+        "a": "Suntem bazați în București și acoperim toate destinațiile în aproximativ 300 km — Brașov, Sinaia, Sibiu, Constanța, Bran și altele. Ai o rută diferită? Contactează-ne."
+      },
+      {
+        "q": "Ce metode de plată acceptați?",
+        "a": "Poți plăti în numerar la sosire (EUR sau RON) sau cu cardul. Detaliile de plată se confirmă odată cu confirmarea rezervării."
+      }
+    ]
+  },
+  "success": {
+    "title": "Rezervare Confirmată!",
+    "subtitle": "Vă vom confirma rezervarea în maxim 1 oră prin email și WhatsApp.",
+    "bookingId": "ID Rezervare",
+    "details": "Detalii Rezervare",
+    "whatsapp": "Chat pe WhatsApp",
+    "newBooking": "Rezervare Nouă",
+    "home": "Înapoi Acasă"
+  },
+  "admin": {
+    "login": {
+      "title": "Autentificare Admin",
+      "email": "Email",
+      "password": "Parolă",
+      "submit": "Conectare"
+    },
+    "dashboard": {
+      "title": "Rezervări",
+      "filter": "Filtrează după status",
+      "all": "Toate",
+      "pending": "În așteptare",
+      "confirmed": "Confirmate",
+      "inProgress": "În desfășurare",
+      "completed": "Finalizate",
+      "cancelled": "Anulate"
+    },
+    "booking": {
+      "customer": "Client",
+      "route": "Rută",
+      "vehicle": "Vehicul",
+      "date": "Data",
+      "total": "Total",
+      "status": "Status",
+      "actions": "Acțiuni",
+      "updateStatus": "Actualizează Status",
+      "adminNotes": "Note Admin",
+      "save": "Salvează",
+      "whatsapp": "WhatsApp Client",
+      "back": "Înapoi la Dashboard"
+    }
+  }
+}

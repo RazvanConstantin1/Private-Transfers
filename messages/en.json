@@ -1,0 +1,236 @@
+{
+  "nav": {
+    "services": "Services",
+    "fleet": "Fleet",
+    "routes": "Routes",
+    "about": "About",
+    "contact": "Contact",
+    "bookNow": "Book Now"
+  },
+  "hero": {
+    "eyebrow": "100% Electric Fleet · 3 Vehicle Tiers",
+    "headline": "Premium electric transfers across",
+    "headlineAccent": "Romania.",
+    "subtitle": "English-speaking driver. Fixed pricing. No surge. Airport, intercity & hourly.",
+    "ctaPrimary": "Book Your Transfer",
+    "ctaWhatsApp": "WhatsApp Us",
+    "trust": {
+      "electric": "100% Electric",
+      "englishDriver": "Private Driver",
+      "fixedPrice": "Fixed Pricing",
+      "available": "24/7 Available"
+    }
+  },
+  "services": {
+    "title": "Choose Your Service",
+    "subtitle": "Three ways to travel in comfort across Romania.",
+    "airport": {
+      "title": "Airport Transfers",
+      "description": "Stress-free pickups and drop-offs at Henri Coandă International Airport (OTP). Flight tracking included.",
+      "from": "from €48"
+    },
+    "intercity": {
+      "title": "Intercity Routes",
+      "description": "Door-to-door comfort between Bucharest and Romania's most beautiful destinations. Fixed price, no surprises.",
+      "from": "from €100"
+    },
+    "hourly": {
+      "title": "Hourly Booking",
+      "description": "Your personal driver for the day. Business meetings, city tours, events — flexibility at its finest.",
+      "from": "from €60/hr"
+    }
+  },
+  "routes": {
+    "title": "Popular Routes",
+    "subtitle": "Fixed prices, no surge pricing. Ever.",
+    "vehicle": "Tesla Model 3",
+    "from": "from",
+    "withKona": "with Kona",
+    "viewAll": "View All Routes",
+    "routes": {
+      "brasov": { "name": "Bucharest → Brașov", "distance": "166 km", "duration": "2h 30min", "price": "€196" },
+      "sinaia": { "name": "Bucharest → Sinaia", "distance": "125 km", "duration": "1h 45min", "price": "€155" },
+      "sibiu": { "name": "Bucharest → Sibiu", "distance": "280 km", "duration": "3h 15min", "price": "€465" },
+      "constanta": { "name": "Bucharest → Constanța", "distance": "225 km", "duration": "2h 30min", "price": "€255" },
+      "cluj": { "name": "Bucharest → Cluj-Napoca", "distance": "460 km", "duration": "5h 00min", "price": "€758" },
+      "iasi": { "name": "Bucharest → Iași", "distance": "390 km", "duration": "4h 15min", "price": "€630" }
+    }
+  },
+  "why": {
+    "title": "Why VOLTLANE?",
+    "subtitle": "We built the service we wanted to use ourselves.",
+    "electric": {
+      "title": "100% Electric",
+      "description": "Zero emissions, whisper-quiet rides. Better for Romania, better for you."
+    },
+    "driver": {
+      "title": "Real Driver",
+      "description": "Fluent English, professional and discreet. Always the same high standard."
+    },
+    "pricing": {
+      "title": "Fixed Pricing",
+      "description": "See the price before you book. No surge, no hidden fees, no surprises."
+    },
+    "onTime": {
+      "title": "On Time",
+      "description": "Flight tracking, real-time monitoring. We're there before you are."
+    }
+  },
+  "fleet": {
+    "title": "Three vehicles.",
+    "titleAccent": "One standard of luxury.",
+    "subtitle": "Pick the right fit for your journey — every vehicle is electric, every ride is premium.",
+    "from": "from",
+    "perKm": "/km",
+    "passengers": "passengers",
+    "luggage": "luggage",
+    "viewDetails": "View Details",
+    "selectVehicle": "Select"
+  },
+  "cta": {
+    "headline": "Your next ride in",
+    "headlineAccent": "Romania",
+    "headlineEnd": "starts here.",
+    "subtitle": "Join hundreds of travelers who chose VOLTLANE for a quieter, cleaner journey.",
+    "button": "Book Your Transfer",
+    "whatsapp": "Chat on WhatsApp"
+  },
+  "footer": {
+    "tagline": "Premium electric transfers across Romania.",
+    "services": "Services",
+    "company": "Company",
+    "legal": "Legal",
+    "contact": "Contact",
+    "airport": "Airport Transfers",
+    "intercity": "Intercity Routes",
+    "hourly": "Hourly Booking",
+    "fleet": "Our Fleet",
+    "about": "About",
+    "contactPage": "Contact",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions",
+    "copyright": "© 2026 VOLTLANE. All rights reserved.",
+    "madeWith": "Made with ⚡ in Romania"
+  },
+  "booking": {
+    "title": "Book Your Transfer",
+    "subtitle": "Real-time pricing. No surprises.",
+    "tripType": "Trip Type",
+    "oneWay": "One Way",
+    "roundTrip": "Round Trip",
+    "pickup": "Pickup Address",
+    "pickupPlaceholder": "Enter pickup location",
+    "dropoff": "Dropoff Address",
+    "dropoffPlaceholder": "Enter destination",
+    "pickupDate": "Pickup Date & Time",
+    "returnDate": "Return Date & Time",
+    "passengers": "Passengers",
+    "flightNumber": "Flight Number",
+    "flightNumberPlaceholder": "e.g. RO123 (optional)",
+    "selectVehicle": "Select Your Vehicle",
+    "name": "Full Name",
+    "namePlaceholder": "Your full name",
+    "email": "Email Address",
+    "emailPlaceholder": "your@email.com",
+    "phone": "Phone Number",
+    "phonePlaceholder": "+40 7XX XXX XXX",
+    "notes": "Special Requests",
+    "notesPlaceholder": "Child seat, meet & greet sign, extra stops...",
+    "continue": "Continue",
+    "back": "Back",
+    "submit": "Confirm Booking · €",
+    "calculating": "Calculating...",
+    "errors": {
+      "pickupRequired": "Pickup address is required",
+      "dropoffRequired": "Dropoff address is required",
+      "dateRequired": "Date and time are required",
+      "returnRequired": "Return date is required for round trips",
+      "vehicleRequired": "Please select a vehicle",
+      "nameRequired": "Full name is required (min 2 characters)",
+      "emailRequired": "Valid email address is required",
+      "phoneRequired": "Valid phone number is required",
+      "priceMismatch": "Price mismatch — please recalculate",
+      "bookingFailed": "Booking failed. Please try again."
+    }
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Frequently asked",
+    "titleAccent": "questions.",
+    "items": [
+      {
+        "q": "How far in advance should I book?",
+        "a": "We recommend booking at least 2 hours ahead. For airport pickups, 24 hours is ideal so we can plan around your flight. Last-minute requests are sometimes possible — just reach out on WhatsApp."
+      },
+      {
+        "q": "Are the prices really fixed?",
+        "a": "Yes. The price you see when booking is exactly what you pay — no surge pricing, no hidden airport fees, no extras. We quote it, you confirm it, that's the price."
+      },
+      {
+        "q": "What happens if my flight is delayed?",
+        "a": "We monitor your flight in real time. If it's delayed, we automatically adjust the pickup time at no extra charge. You don't need to call us — we're already tracking it."
+      },
+      {
+        "q": "Can you accommodate child seats?",
+        "a": "Yes. Just mention 'child seat' (and the child's age if possible) in the Special Requests field when booking. We'll have the appropriate seat fitted and ready."
+      },
+      {
+        "q": "Is the driver English-speaking?",
+        "a": "Yes. Your driver speaks fluent English, is professionally trained, and is discreet. We hold every ride to the same standard."
+      },
+      {
+        "q": "Can I cancel or modify my booking?",
+        "a": "Free cancellation up to 24 hours before pickup. Need to change the time or address? Contact us anytime before that on WhatsApp or email and we'll sort it quickly."
+      },
+      {
+        "q": "Do you only operate from Bucharest?",
+        "a": "We're based in Bucharest and cover all destinations within roughly 300 km — Brașov, Sinaia, Sibiu, Constanța, Bran, and more. Have a different route in mind? Contact us."
+      },
+      {
+        "q": "What payment methods do you accept?",
+        "a": "You can pay in cash on arrival (EUR or RON) or by card. Payment details are confirmed when we confirm your booking."
+      }
+    ]
+  },
+  "success": {
+    "title": "Booking Confirmed!",
+    "subtitle": "We'll confirm your booking within 1 hour via email and WhatsApp.",
+    "bookingId": "Booking ID",
+    "details": "Booking Details",
+    "whatsapp": "Chat on WhatsApp",
+    "newBooking": "Make Another Booking",
+    "home": "Back to Home"
+  },
+  "admin": {
+    "login": {
+      "title": "Admin Login",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign In"
+    },
+    "dashboard": {
+      "title": "Bookings",
+      "filter": "Filter by status",
+      "all": "All",
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "booking": {
+      "customer": "Customer",
+      "route": "Route",
+      "vehicle": "Vehicle",
+      "date": "Date",
+      "total": "Total",
+      "status": "Status",
+      "actions": "Actions",
+      "updateStatus": "Update Status",
+      "adminNotes": "Admin Notes",
+      "save": "Save",
+      "whatsapp": "WhatsApp Customer",
+      "back": "Back to Dashboard"
+    }
+  }
+}
