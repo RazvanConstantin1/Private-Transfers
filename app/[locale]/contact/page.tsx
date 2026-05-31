@@ -1,9 +1,14 @@
 import type { Metadata } from 'next';
+import { generatePageMetadata } from '@/lib/seo/metadata';
 
-export const metadata: Metadata = {
-  title: 'Contact VOLTLANE',
-  description: 'Get in touch with VOLTLANE for bookings, questions, or custom routes. WhatsApp, email, or phone.',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return generatePageMetadata({ pageKey: 'contact', locale, path: '/contact' });
+}
 
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
   await params;

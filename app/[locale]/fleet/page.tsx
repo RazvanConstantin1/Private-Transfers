@@ -2,11 +2,16 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FLEET } from '@/lib/fleet';
+import { generatePageMetadata } from '@/lib/seo/metadata';
 
-export const metadata: Metadata = {
-  title: 'Our Electric Fleet — VOLTLANE',
-  description: 'Three premium electric vehicles: Hyundai Kona, Tesla Model 3 Long Range, and Ford Capri. Fixed pricing from €0.80/km.',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return generatePageMetadata({ pageKey: 'fleet', locale, path: '/fleet' });
+}
 
 export default async function FleetPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

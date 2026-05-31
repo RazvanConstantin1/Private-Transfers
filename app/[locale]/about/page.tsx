@@ -1,10 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { generatePageMetadata } from '@/lib/seo/metadata';
 
-export const metadata: Metadata = {
-  title: 'About VOLTLANE — Premium Electric Transfers Romania',
-  description: 'VOLTLANE is a premium electric chauffeur service operating in Bucharest, Romania. English-speaking driver, 3 electric vehicles, fixed pricing.',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return generatePageMetadata({ pageKey: 'about', locale, path: '/about' });
+}
 
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

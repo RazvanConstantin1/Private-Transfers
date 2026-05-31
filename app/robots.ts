@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+import { SITE } from '@/lib/seo/config';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -6,9 +7,14 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/admin', '/api'],
+        disallow: ['/api/', '/admin/'],
+      },
+      {
+        userAgent: 'GPTBot',
+        disallow: '/',
       },
     ],
-    sitemap: `${process.env.NEXT_PUBLIC_APP_URL || 'https://voltlane.com'}/sitemap.xml`,
+    sitemap: `${SITE.url}/sitemap.xml`,
+    host: SITE.url,
   };
 }

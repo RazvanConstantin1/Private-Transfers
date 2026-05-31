@@ -1,10 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { generatePageMetadata } from '@/lib/seo/metadata';
 
-export const metadata: Metadata = {
-  title: 'Hourly Car Hire with Driver — Bucharest | VOLTLANE',
-  description: 'Book your personal electric driver by the hour in Bucharest. Business meetings, city tours, airport runs. From €60/hr. Fixed pricing.',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return generatePageMetadata({ pageKey: 'hourly', locale, path: '/hourly' });
+}
 
 export default async function HourlyPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
