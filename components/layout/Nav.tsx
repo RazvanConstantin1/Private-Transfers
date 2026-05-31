@@ -25,6 +25,7 @@ export default function Nav() {
     { href: `/${locale}/airport-transfers`, label: t('services') },
     { href: `/${locale}/fleet`, label: t('fleet') },
     { href: `/${locale}/intercity`, label: t('routes') },
+    { href: `/${locale}/blog`, label: t('blog') },
     { href: `/${locale}/about`, label: t('about') },
     { href: `/${locale}/contact`, label: t('contact') },
   ];
