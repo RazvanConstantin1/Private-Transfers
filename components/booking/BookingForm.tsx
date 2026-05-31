@@ -12,6 +12,7 @@ import { calculateAllPrices, type PriceBreakdown } from '@/lib/pricing';
 import { formatEur } from '@/lib/utils';
 import AddressAutocomplete from './AddressAutocomplete';
 import VehicleSelector from './VehicleSelector';
+import DateTimePicker from './DateTimePicker';
 import { toast } from 'sonner';
 
 interface AddressValue {
@@ -304,18 +305,19 @@ export default function BookingForm() {
             <label htmlFor="pickupDatetime" className="block text-sm font-600 mb-2" style={{ color: 'var(--text-secondary)' }}>
               {t('pickupDate')}
             </label>
-            <input
-              id="pickupDatetime"
-              type="datetime-local"
-              min={getMinDatetime()}
-              {...register('pickupDatetime')}
-              className="w-full px-4 py-3 rounded-xl border text-sm transition-vl focus:outline-none focus:border-[var(--accent-volt)] focus:ring-1 focus:ring-[var(--accent-volt)]"
-              style={{
-                background: 'var(--bg-elevated)',
-                borderColor: errors.pickupDatetime ? '#ef4444' : 'var(--border)',
-                color: 'var(--text-primary)',
-                colorScheme: 'dark',
-              }}
+            <Controller
+              name="pickupDatetime"
+              control={control}
+              render={({ field }) => (
+                <DateTimePicker
+                  id="pickupDatetime"
+                  value={field.value ?? ''}
+                  onChange={field.onChange}
+                  min={getMinDatetime()}
+                  placeholder={t('pickupDate')}
+                  hasError={!!errors.pickupDatetime}
+                />
+              )}
             />
             {errors.pickupDatetime && (
               <p className="text-xs mt-1" style={{ color: '#ef4444' }}>{errors.pickupDatetime.message}</p>
@@ -328,18 +330,18 @@ export default function BookingForm() {
               <label htmlFor="returnDatetime" className="block text-sm font-600 mb-2" style={{ color: 'var(--text-secondary)' }}>
                 {t('returnDate')}
               </label>
-              <input
-                id="returnDatetime"
-                type="datetime-local"
-                min={pickupDatetime ? getMinDatetime(new Date(pickupDatetime), 1) : getMinDatetime()}
-                {...register('returnDatetime')}
-                className="w-full px-4 py-3 rounded-xl border text-sm transition-vl focus:outline-none focus:border-[var(--accent-volt)] focus:ring-1 focus:ring-[var(--accent-volt)]"
-                style={{
-                  background: 'var(--bg-elevated)',
-                  borderColor: 'var(--border)',
-                  color: 'var(--text-primary)',
-                  colorScheme: 'dark',
-                }}
+              <Controller
+                name="returnDatetime"
+                control={control}
+                render={({ field }) => (
+                  <DateTimePicker
+                    id="returnDatetime"
+                    value={field.value ?? ''}
+                    onChange={field.onChange}
+                    min={pickupDatetime ? getMinDatetime(new Date(pickupDatetime), 1) : getMinDatetime()}
+                    placeholder={t('returnDate')}
+                  />
+                )}
               />
             </div>
           )}
