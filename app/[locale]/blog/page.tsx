@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { generatePageMetadata } from '@/lib/seo/metadata';
 import { JsonLd } from '@/components/seo/JsonLd';
@@ -60,18 +61,34 @@ export default async function BlogIndexPage({
               className="group block rounded-2xl border overflow-hidden mb-12 transition-vl hover:border-[var(--accent-volt)]"
               style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
             >
-              <div className="p-8">
-                <div className="flex items-center gap-3 mb-4">
+              {/* Hero image */}
+              <div className="relative w-full h-64 md:h-80 overflow-hidden">
+                <Image
+                  src={featured.heroImage}
+                  alt={featured.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 1000px"
+                  priority
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{ background: 'linear-gradient(to top, rgba(10,10,11,0.7) 0%, transparent 60%)' }}
+                />
+                <div className="absolute bottom-4 left-6 flex items-center gap-3">
                   <span
                     className="text-xs font-600 uppercase tracking-widest px-2.5 py-1 rounded-full"
-                    style={{ background: 'var(--accent-volt-dim)', color: 'var(--accent-volt)', fontFamily: 'var(--font-jetbrains)' }}
+                    style={{ background: 'var(--accent-volt)', color: '#0A0A0B', fontFamily: 'var(--font-jetbrains)' }}
                   >
                     {isRo ? 'Recomandat' : 'Featured'}
                   </span>
-                  <span className="text-xs" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-jetbrains)' }}>
+                  <span className="text-xs" style={{ color: 'rgba(245,244,240,0.8)', fontFamily: 'var(--font-jetbrains)' }}>
                     {featured.category}
                   </span>
                 </div>
+              </div>
+
+              <div className="p-8">
                 <h2
                   className="font-display text-2xl md:text-3xl font-300 mb-3 transition-vl group-hover:text-[var(--accent-volt)]"
                   style={{ color: 'var(--text-primary)' }}
@@ -106,28 +123,45 @@ export default async function BlogIndexPage({
                   <Link
                     key={article.slug}
                     href={`/${locale}/blog/${article.slug}`}
-                    className="group rounded-2xl border p-6 flex flex-col transition-vl hover:border-[var(--accent-volt)]"
+                    className="group rounded-2xl border overflow-hidden flex flex-col transition-vl hover:border-[var(--accent-volt)]"
                     style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
                   >
-                    <span
-                      className="text-xs font-600 uppercase tracking-widest px-2 py-1 rounded-full mb-4 self-start"
-                      style={{ background: 'var(--bg-elevated)', color: 'var(--text-muted)', fontFamily: 'var(--font-jetbrains)' }}
-                    >
-                      {article.category}
-                    </span>
-                    <h3
-                      className="font-display text-lg font-300 mb-3 transition-vl group-hover:text-[var(--accent-volt)] flex-1"
-                      style={{ color: 'var(--text-primary)' }}
-                    >
-                      {article.title}
-                    </h3>
-                    <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
-                      {article.excerpt.substring(0, 120)}...
-                    </p>
-                    <div className="flex items-center gap-3 text-xs" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-jetbrains)' }}>
-                      <span>{article.readingTime} min</span>
-                      <span>·</span>
-                      <span>{new Date(article.publishedAt).toLocaleDateString(locale === 'ro' ? 'ro-RO' : 'en-GB', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                    {/* Card image */}
+                    <div className="relative w-full h-44 overflow-hidden shrink-0">
+                      <Image
+                        src={article.heroImage}
+                        alt={article.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                      <div
+                        className="absolute inset-0"
+                        style={{ background: 'linear-gradient(to top, rgba(10,10,11,0.5) 0%, transparent 50%)' }}
+                      />
+                    </div>
+
+                    <div className="p-5 flex flex-col flex-1">
+                      <span
+                        className="text-xs font-600 uppercase tracking-widest px-2 py-1 rounded-full mb-3 self-start"
+                        style={{ background: 'var(--bg-elevated)', color: 'var(--text-muted)', fontFamily: 'var(--font-jetbrains)' }}
+                      >
+                        {article.category}
+                      </span>
+                      <h3
+                        className="font-display text-lg font-300 mb-2 transition-vl group-hover:text-[var(--accent-volt)] flex-1"
+                        style={{ color: 'var(--text-primary)' }}
+                      >
+                        {article.title}
+                      </h3>
+                      <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
+                        {article.excerpt.substring(0, 110)}...
+                      </p>
+                      <div className="flex items-center gap-3 text-xs" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-jetbrains)' }}>
+                        <span>{article.readingTime} min</span>
+                        <span>·</span>
+                        <span>{new Date(article.publishedAt).toLocaleDateString(locale === 'ro' ? 'ro-RO' : 'en-GB', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                      </div>
                     </div>
                   </Link>
                 ))}

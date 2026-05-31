@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
 import Link from 'next/link';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import remarkGfm from 'remark-gfm';
@@ -184,6 +185,22 @@ export default async function BlogArticlePage({
               {fm.title.substring(0, 40)}...
             </span>
           </nav>
+
+          {/* Hero image */}
+          <div className="relative w-full h-56 md:h-72 rounded-2xl overflow-hidden mb-8">
+            <Image
+              src={fm.heroImage}
+              alt={fm.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 768px"
+              priority
+            />
+            <div
+              className="absolute inset-0 rounded-2xl"
+              style={{ background: 'linear-gradient(to top, rgba(10,10,11,0.4) 0%, transparent 60%)' }}
+            />
+          </div>
 
           {/* Article header */}
           <div className="mb-8">
